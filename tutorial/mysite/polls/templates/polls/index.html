@@ -1,7 +1,47 @@
 {% load staticfiles %}
-<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}" />
+    <link rel="stylesheet" href="{{STATIC_URL}}bootstrap/css/bootstrap.css">
+    <style>
+        body {
+            padding-top: 60px;
+        }
+    </style>
+    <link href="{{STATIC_URL}}bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <script src="{{STATIC_URL}}bootstrap/js/bootstrap.js" type="text/javascript"></script>
 
-{% if latest_question_list %}
+    {%  block extrahead %}
+    {% endblock %}
+    <script type="text/javascript">
+    $(function() {
+        {% block jquery %}
+        {% endblock %}
+    });
+    </script>
+</head>
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <div class="brand">My Site</div>
+            <ul class="nav">
+                <li><a href="" class=""></a>List</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    {% block content %}
+    Empty page
+    {% endblock %}
+</div>
+ {% if latest_question_list %}
     <ul>
         {% for question in latest_question_list %}
             <li><a href="{% url 'polls:detail' question.id %}">
@@ -12,4 +52,8 @@
     </ul>
 {% else %}
     <p>No polls are available</p>
-{% endif %}
+{% endif %}   
+</body>
+</html>
+
+
